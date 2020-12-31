@@ -46,23 +46,30 @@ int main()
 {
   int t;
   sd(t);
-  int a[200001]={0};
-  int b[100001]={0};
   rep(tt,t){
     //cout<<"Case #"<<tt+1<<": ";
-    int n,j;
-    sd(n);
-    //v(int) a(2*n+2);
-    sa(b,n,d);
-    rep(i,n) a[b[i]]++;
-    int c=0,p=2*n+2;
-    rrep(i,2*n+1){
-      if(a[i]>1) c+=min(2,p-i),p=i;
-      else if(a[i] && p>i+1) c++,p=i+1;
-      else if(a[i]) c++,p=i;
-      //cout<<c<<" ";
+    string s;
+    cin>>s;
+    int c=0;
+    for(int i=0;s[i]!='\0'&& s[i+1]!='\0'&& s[i+2]!='\0';i++){
+        if(s[i]==s[i+2] && i>0 && s[i-1]==s[i] && s[i]!='X'){
+            c++;
+            s[i]='X';
+           // i+=2;
+        }
+        else if(s[i]==s[i+2] && s[i]!='X'){
+            c++;
+            s[i+2]='X';
+          //  i+=2;
+        }
     }
-    rep(i,n) a[b[i]]--;
+    for(int i=0;s[i]!='\0'&& s[i+1]!='\0';i++){
+        if(s[i]==s[i+1] && s[i]!='X'){
+            c++;
+            s[i+1]='Y';
+            i++;
+        }
+    }
     cout<<c;
     nline;
   }

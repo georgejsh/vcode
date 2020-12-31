@@ -35,35 +35,75 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
-/*v(int) adj[200001];
+v(int) adj[200001];
+int w[100001];
+//int par[100001];
+//int childc[100001];
+int degree[100001];
+priority_queue<p2,vector<p2>,less<p2> > pq;
 void dfs(int i,int p){
+    int v=0;
     rep(j,adj[i].size()){
         if(p!=adj[i][j])
-            dfs(adj[i][j],i);
+            dfs(adj[i][j],i),v++;
     }
-}*/
+    //childc[i]=v;
+    //par[i]=p;
+    if(v==0) pq.push(mk(w[p],p));
+}
+
 int main()
 {
   int t;
   sd(t);
-  int a[200001]={0};
-  int b[100001]={0};
   rep(tt,t){
     //cout<<"Case #"<<tt+1<<": ";
-    int n,j;
+    int n;
     sd(n);
-    //v(int) a(2*n+2);
-    sa(b,n,d);
-    rep(i,n) a[b[i]]++;
-    int c=0,p=2*n+2;
-    rrep(i,2*n+1){
-      if(a[i]>1) c+=min(2,p-i),p=i;
-      else if(a[i] && p>i+1) c++,p=i+1;
-      else if(a[i]) c++,p=i;
-      //cout<<c<<" ";
+    sa(w,n,d);
+    rep(i,n) adj[i].clear(),degree[i]=0;
+    while(!pq.empty())pq.pop();
+    rep(i,n-1){
+        int p,q;
+        cin>>p>>q;p--;q--;
+        adj[p].pb(q);
+        adj[q].pb(p);
+        degree[p]++;
+        degree[q]++;
     }
-    rep(i,n) a[b[i]]--;
-    cout<<c;
+    int y=0;
+    rep(i,n) if(degree[i]>1) {y=i;}
+    dfs(y,-1);
+    llu sum=0;
+    rep(i,n) sum+=w[i];
+    cout<<sum<<" ";
+    rep(i,n-2){
+        auto x=pq.top();
+        pq.pop();
+        while(degree[x.se]==1) {
+            x=pq.top();
+            pq.pop();
+        }
+        sum+=x.fi;
+        degree[x.se]--;
+        if(degree[x.se]==1)
+        rep(j,adj[x.se].size()){
+            if(degree[adj[x.se][j]]!=1){ 
+                pq.push(mk(w[adj[x.se][j]],adj[x.se][j]));
+                break;
+            }
+               
+        }
+        //pp2(x); cout<<childc[x.se]<<" aaa ";
+        //if(!childc[x.se] && par[x.se]!=-1) pq.push(mk(w[par[x.se]],par[x.se]));
+
+        cout<<sum<<" ";
+    }
+   /* while(!pq.empty()){
+        auto x=pq.top();
+        pq.pop();
+        pp2(x);
+    }*/
     nline;
   }
   return 0;
