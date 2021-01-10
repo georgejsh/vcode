@@ -1,4 +1,13 @@
-
+/*
+ID: georgej2
+LANG: C++
+TASK: test
+*/
+//#define submit 0
+#define task "test"
+#define input(a,b) a#b
+#define input_file input(task,.in)
+#define output_file input(task,.out) 
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
@@ -37,7 +46,13 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
+const int maxN=1e3;
 int main() {
+    #ifdef submit
+        ofstream cout (output_file);
+        ifstream cin (input_file);
+    #endif
     
     return 0;
 }
+

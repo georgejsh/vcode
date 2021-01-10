@@ -1,4 +1,8 @@
-
+/*
+ID: georgej2
+LANG: C++
+TASK: combo
+*/
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
@@ -37,7 +41,37 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
+bool check(int n,int i,int j,int k, int a[3]){
+    bool ok=false;
+    reps(ii,-2,3){
+        if(i==(a[0]-1+ii+n)%n+1){ok=true;}
+    }
+    if(!ok) return false;
+    ok=false;
+    reps(ii,-2,3){
+        if(j==(a[1]-1+ii+n)%n+1){ok=true;}
+    }
+    if(!ok) return false;
+    ok=false;
+    reps(ii,-2,3){
+        if(k==(a[2]-1+ii+n)%n+1){ok=true;}
+    }
+    if(!ok) return false;
+    return true;
+}
 int main() {
-    
+    ofstream cout ("combo.out");
+    ifstream cin ("combo.in");
+    int n;
+    cin>>n;
+    int a[2][3];
+    rep(i,2) rep(j,3) cin>>a[i][j];
+    int c=0;
+    rep(i,n) rep(j,n) rep(k,n){
+        if(check(n,i+1,j+1,k+1,a[0]) )  c++;
+        else if(check(n,i+1,j+1,k+1,a[1]) )  c++;
+    }
+    cout<<c<<endl;
     return 0;
 }
+

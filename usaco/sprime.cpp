@@ -1,4 +1,13 @@
-
+/*
+ID: georgej2
+LANG: C++
+TASK: sprime
+*/
+#define submit 0
+#define task "sprime"
+#define input(a,b) a#b
+#define input_file input(task,.in)
+#define output_file input(task,.out) 
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
@@ -37,7 +46,60 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
+const int maxN=1e3;
+v(int) ans;
+bool isprime(int n){
+    for(int i=2;i*i<=n;i++) if(n%i==0) return false;
+    return true;
+}
+bool check(char s[10],int i){
+    s[i+1]='\0';
+    int x;
+    sscanf(s,"%d",&x);
+    return isprime(x);
+}
+void rec(char s[10],int i,int n){
+    if(n==1){
+        ans.pb(2);
+        ans.pb(3);
+        ans.pb(5);
+        ans.pb(7);
+    }
+    else if(i==0){
+        //s[1]='\0';
+        s[i]='2';
+        rec(s,i+1,n);
+        s[i]='3';
+        rec(s,i+1,n);
+        s[i]='5';
+        rec(s,i+1,n);
+        s[i]='7';
+        rec(s,i+1,n);
+    }else if(i==n){
+        s[i]='\0';
+        int x;
+        sscanf(s,"%d",&x);
+         ans.pb(x);
+    }
+    else{
+        rep(j,10){
+            s[i]=j+'0';
+            if(check(s,i)) rec(s,i+1,n);
+        }
+    }
+}
 int main() {
-    
+    #ifdef submit
+        ofstream cout (output_file);
+        ifstream cin (input_file);
+    #endif
+    int n;
+    cin>>n;
+    char s[10];
+    rec(s,0,n);
+    sort(ans.begin(),ans.end());
+    //cout<<ans.size()<<endl;
+    rep(i,ans.size()) cout<<ans[i]<<endl;
     return 0;
 }
+

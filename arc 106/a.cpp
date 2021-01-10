@@ -1,6 +1,7 @@
-
+#include <atcoder/maxflow>
 #include <bits/stdc++.h>
 using namespace std;
+using namespace atcoder;
 #define lli long long int
 #define llu unsigned long long int
 //#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
@@ -37,7 +38,45 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
+const int maxN=200001;
+const int maxV=1e9;
+int a[maxN];
+int b[maxN];
 int main() {
-    
+    int n,m;
+    lli sa=0,sb=0;
+    cin>>n>>m;
+    rep(i,n) cin>>a[i],sa+=a[i];
+    rep(i,n) cin>>b[i],sb+=b[i];
+    mf_graph<lli> graph(n+2);
+    int st=n,end=st+1;
+    rep(i,m){
+        int x,y;
+        cin>>x>>y;
+        x--;y--;
+        graph.add_edge(x,y,maxV*1e6);
+        graph.add_edge(y,x,maxV*1e6);
+    }
+    if(sa!=sb){
+        cout<<"No"<<endl;
+        return 0;
+    }
+    lli v=0;
+    rep(i,n) {
+        if(b[i]>a[i]){
+            graph.add_edge(st,i,b[i]-a[i]);
+           // graph.add_edge(i,st,b[i]-a[i]);
+            v+=b[i]-a[i];
+        }else if(b[i]<a[i]){
+            graph.add_edge(i,end,a[i]-b[i]);
+           // graph.add_edge(i,st,a[i]-b[i]);
+        }
+    }
+    lli fl=graph.flow(st,end);
+    if(fl!=v){
+         cout<<"No"<<endl;
+        return 0;
+    }
+    cout<<"Yes"<<endl;
     return 0;
 }

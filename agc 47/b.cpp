@@ -37,7 +37,51 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
+struct node{
+    struct node * ch[26]={0};
+    int ends=0;
+};
+struct node* head;
+void insert(string s){
+    struct node* p=head;
+    rrep(i,s.length()){
+        if(p->ch[s[i]-'a']==NULL){
+               p->ch[s[i]-'a'] = new struct node(); 
+        }
+        p=p->ch[s[i]-'a'];
+    }
+    p->ends++;
+}
+int traverse(string s){
+    map<char,int> ss;
+    rep(i,s.length()) ss[s[i]]++;
+    struct node* p=head;
+    int ans=0;
+    rrep(i,s.length()){
+        for(auto x:ss){
+            if(x.se && p->ch[x.fi-'a']!=NULL) ans+=p->ch[x.fi-'a']->ends;
+        }
+        if(p->ch[s[i]-'a']==NULL) break;
+        p=p->ch[s[i]-'a'];
+        ss[s[i]]--;
+    }
+    return ans;
+    //p->ends++;
+}
 int main() {
-    
+    head=new struct node();
+    int n;
+    cin>>n;
+    lli ans=0;
+    string s[200001];
+    rep(i,n){
+        //string s;
+        cin>>s[i];
+        //ans+=traverse(s);
+        insert(s[i]);
+    }
+    rep(i,n)
+    ans+=traverse(s[i]);
+    cout<<ans-n<<endl;
     return 0;
 }

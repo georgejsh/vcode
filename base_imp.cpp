@@ -1,7 +1,87 @@
 edit distance
-lcs
+factorisation
+mint perm(int n,int m){
+    return fact[n]*ifact[n-m];
+}
+mint comb(int n,int m){
+    return fact[n]*ifact[n-m]*ifact[m];
+}
+v(mint) fact(maxN),ifact(maxN);
+void init(){
+    mint::set_mod(1e9+7);
+    fact[0]=1;
+    reps(i,1,maxN) fact[i]=fact[i-1]*i;
+    ifact[maxN-1]=ex(fact[maxN-1].val(),MAX-2);
+    rrep(i,maxN-1) ifact[i]=ifact[i+1]*(i+1);
+    //ipow[0]=1;
+    //reps(i,1,maxN) ipow[i]=ipow[i-1]*i2;
+}
+fenwicktree --point update point query
+int sum(int idx) {
+        int ret = 0;
+        for (++idx; idx > 0; idx -= idx & -idx)
+            ret += bit[idx];
+        return ret;
+    }
 
+    int sum(int l, int r) {
+        return sum(r) - sum(l - 1);
+    }
+
+    void add(int idx, int delta) {
+        for (++idx; idx < n; idx += idx & -idx)
+            bit[idx] += delta;
+    }
+
+
+maximum xor from any subset
+ rep(i,n){
+        rrep(j,20){
+            if(a[i]&(1<<j)){
+                if(b[j]) a[i]^=b[j];
+                else {
+                    b[j]=a[i];
+                    break;
+                    }
+            } 
+        }
+    }
+    int ans=0;
+    rrep(j,20){
+        if((ans^b[j])>ans) ans=ans^b[j];
+        //cout<<j<<" "<<b[j]<<" aa";
+    }
+    
+prime factorisation
+#define MAX 10000000
+lli ans=0;
+bool prime[MAX+1]; 
+int lprime[MAX+1];
+memset(prime, true, sizeof(prime)); 
+  
+    for (int p=2; p*p<=MAX; p++) 
+    { 
+        // If prime[p] is not changed, then it is a prime 
+        if (prime[p] == true) 
+        { 
+            // Update all multiples of p greater than or  
+            // equal to the square of it 
+            // numbers which are multiple of p and are 
+            // less than p^2 are already been marked.  
+            for (int i=p*p; i<=MAX; i += p) 
+            if(prime[i])
+                prime[i] = false,lprime[i]=p; 
+        } 
+    } 
+    prime[1]=false;
+    rep(i,MAX+1) if(!lprime[i]) lprime[i]=i;
 gcd
+void primediv(int i){
+  while(i!=1){
+    int c=0;
+    while(!(i%lprime[i])) i/=lprime[i],c++;
+  }
+}
 int gcd(int a,int b)
 {
  if(a==0)

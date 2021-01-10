@@ -38,6 +38,8 @@ using namespace std;
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
 int main() {
-    
+    cout<<50000<<endl;
+    rep(i,100000) cout<<1<<" ";
+    cout<<endl;
     return 0;
 }

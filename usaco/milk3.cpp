@@ -1,4 +1,13 @@
-
+/*
+ID: georgej2
+LANG: C++
+TASK: milk3
+*/
+#define submit 0
+#define task "milk3"
+#define input(a,b) a#b
+#define input_file input(task,.in)
+#define output_file input(task,.out) 
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
@@ -37,7 +46,45 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
-int main() {
+const int maxN=1e3;
+v(int) lists;
+map<p3,bool> mp;
+int aa,bb,cc;
+p2 pour(int a,int b,int bx){
+    int x=min(a,bx-b);
+    a-=x;b+=x;
+    return mk(a,b);
+}
+void recurse(int a,int b,int c){
+    if(mp[mk(mk(a,b),c)]) return;
+    mp[mk(mk(a,b),c)]=true;
+    auto p=pour(a,b,bb);
+    recurse(p.fi,p.se,c);
+    p=pour(a,c,cc);
+    recurse(p.fi,b,p.se);
+    p=pour(b,a,aa);
+    recurse(p.se,p.fi,c);
+    p=pour(b,c,cc);
+    recurse(a,p.fi,p.se);
+    p=pour(c,b,bb);
+    recurse(a,p.se,p.fi);
+    p=pour(c,a,aa);
+    recurse(p.se,b,p.fi);
     
+}
+int main() {
+    #ifdef submit
+        ofstream cout (output_file);
+        ifstream cin (input_file);
+    #endif
+    
+    cin>>aa>>bb>>cc;
+    recurse(0,0,cc);
+    for(auto x:mp) if(x.fi.fi.fi==0) lists.pb(x.fi.se); 
+    sort(lists.begin(),lists.end());
+    cout<<lists[0];
+    reps(i,1,lists.size()) cout<<" "<<lists[i];
+    cout<<endl;
     return 0;
 }
+

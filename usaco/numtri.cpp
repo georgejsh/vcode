@@ -1,4 +1,13 @@
-
+/*
+ID: georgej2
+LANG: C++
+TASK: numtri
+*/
+#define submit 0
+#define task "numtri"
+#define input(a,b) a#b
+#define input_file input(task,.in)
+#define output_file input(task,.out) 
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
@@ -37,7 +46,28 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
+const int maxN=1e3;
+int a[1001][1000]={0};
+//int a[1000]={0};
 int main() {
-    
+    #ifdef submit
+        ofstream cout (output_file);
+        ifstream cin (input_file);
+    #endif
+    int n,x;
+    cin>>n;
+    rep(i,n){
+        rep(j,i+1){
+            cin>>x;
+            a[i+1][j]=max(a[i+1][j],a[i][j]+x);
+            a[i+1][j+1]=max(a[i+1][j+1],a[i][j]+x);
+        }
+    }
+    int ans=0;
+    rep(i,n){
+        ans=max(ans,a[n][i]);
+    }
+    cout<<ans<<endl;
     return 0;
 }
+

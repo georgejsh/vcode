@@ -1,6 +1,7 @@
-
+#include <atcoder/maxflow>
 #include <bits/stdc++.h>
 using namespace std;
+using namespace atcoder;
 #define lli long long int
 #define llu unsigned long long int
 //#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
@@ -38,6 +39,33 @@ using namespace std;
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
 int main() {
-    
+    int n,m;
+    cin>>n>>m;
+    if(n==1 && m==0){
+        cout<<"1 2"<<endl;
+        return 0;
+    }
+    if(m<0) {
+        cout<<-1<<endl;
+        return 0;
+    }
+    if(m>n-2) {
+        cout<<-1<<endl;
+        return 0;
+    }
+    int c=(n-2)-m;
+    int c2=(n-1)-c;
+    int x=1,y=1e6;
+    cout<<x<<" "<<y<<endl;
+    x++;
+    rep(i,c2) {
+        cout<<x<<" "<<x+1<<endl;
+        x+=2;
+    }
+    x=y+1;
+    rep(i,c){
+        cout<<x<<" "<<x+1<<endl;
+        x+=2;
+    }
     return 0;
 }

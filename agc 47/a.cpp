@@ -37,7 +37,30 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
+p2 findpow(lli x){
+    int c2=0;
+    while(!(x%2)) c2++,x=x/2;
+    int c5=0;
+    while(!(x%5)) c5++,x=x/5;
+    return mk(c2,c5);
+}
+map<p2,int> mp;
 int main() {
-    
+    int n;
+    cin>>n;
+    lli ans=0;
+    rep(i,n) {
+        long double a;
+        cin>>a;
+        a=a*1e9;
+        long long y = llround(a);
+        auto p=findpow(y);
+        for(auto x:mp){
+            //cout<<x.fi.fi<<" "<<x.fi.se<<" "<<x.se<<endl;
+            if(x.fi.fi+p.fi>=18 && x.fi.se+p.se>=18) ans+=x.se;
+        }
+        mp[p]++;
+    }
+    cout<<ans<<endl;
     return 0;
 }

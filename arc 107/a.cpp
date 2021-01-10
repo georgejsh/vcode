@@ -37,7 +37,23 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
+#define MX 998244353
+lli a[200010]={0};
 int main() {
-    
+    int n,k;
+    cin>>n>>k;
+    reps(i,1,n+1){
+        a[i+1]++;
+        a[i+n+1]--;
+    }
+    reps(i,1,2*n+2){
+        a[i]=a[i]+a[i-1];
+    }
+    lli ans=0;
+    k=abs(k);
+    reps(i,k+2,2*n+2){
+        ans+=a[i]*a[i-k];
+    }
+    cout<<ans<<endl;
     return 0;
 }

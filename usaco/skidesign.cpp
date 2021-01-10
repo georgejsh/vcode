@@ -1,4 +1,13 @@
-
+/*
+ID: georgej2
+LANG: C++
+TASK: skidesign
+*/
+#define submit 0
+#define task "skidesign"
+#define input(a,b) a#b
+#define input_file input(task,.in)
+#define output_file input(task,.out) 
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
@@ -37,7 +46,28 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
+const int maxN=1e3;
 int main() {
-    
+    #ifdef submit
+        ofstream cout (output_file);
+        ifstream cin (input_file);
+    #endif
+    //cout<<input_file<<endl;
+    int a[maxN];
+    int n;
+    cin>>n;
+    rep(i,n) cin>>a[i];
+    int ans=INT_MAX;
+    rep(i,101){
+        int tans=0;
+        rep(j,n){
+            if(a[j]<i) tans+=(i-a[j])*(i-a[j]);
+            else if(a[j]>i+17) tans+=(a[j]-i-17)*(a[j]-i-17);
+        }
+        ans=min(ans,tans);
+    }
+    cout<<ans<<endl;
+
     return 0;
 }
+

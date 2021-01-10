@@ -38,6 +38,38 @@ using namespace std;
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
 int main() {
-    
+    lli n,l,t;
+    cin>>n>>l;
+    lli a[100001],b[100001];
+    sa(a,n)
+    sa(b,n);
+    a[n]=b[n]=l+1;
+    n++; 
+    lli prev=0;
+    rep(i,n) t=a[i],a[i]=a[i]-prev-1,prev=t;
+    prev=0;
+    rep(i,n) t=b[i],b[i]=b[i]-prev-1,prev=t;
+   // rep(i,n) cout<<a[i]<<" ";
+   // cout<<endl;
+   // rep(i,n) cout<<b[i]<<" ";
+    //cout<<endl;
+    lli ans=0;
+    int i,j;
+    for( i=0,j=0;;){
+        while(!b[j] && j<n) j++;
+        while(!a[i] && i<n) i++;
+        if(i==n ) break;
+        if(j==n) break;
+        lli la=0;
+        int ii=i;
+        while(la<b[j] && i<n) la+=a[i],i++;
+        if(la!=b[j]) {cout<<-1<<endl;return 0;}
+        //cout<<ii<<" "<<i<<" "<<j<<endl;
+        ans+=max(j-ii,0)+max(i-1-j,0);
+        j++;
+    }
+    if(i==n && j==n)
+    cout<<ans<<endl;
+    else {cout<<-1<<endl;return 0;}
     return 0;
 }

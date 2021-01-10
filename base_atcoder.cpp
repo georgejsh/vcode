@@ -1,6 +1,7 @@
-
+#include <atcoder/maxflow>
 #include <bits/stdc++.h>
 using namespace std;
+using namespace atcoder;
 #define lli long long int
 #define llu unsigned long long int
 //#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
@@ -39,5 +40,6 @@ using namespace std;
 #define debug 0
 int main() {
     
+
     return 0;
 }
