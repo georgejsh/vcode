@@ -1,10 +1,8 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
 #define llu unsigned long long int
-//#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
-#define sa(a,n) rep(ii,n) cin>>a[ii];
+#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
 #define rep(i,n) for(int i=0;i<n;i++) 
 #define reps(i,a,n) for(int i=a;i<n;i++) 
 #define rrep(i,n) for(int i=n-1;i>=0;i--)
@@ -37,7 +35,37 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
-int main() {
-    
-    return 0;
+/*v(int) adj[200001];
+void dfs(int i,int p){
+    rep(j,adj[i].size()){
+        if(p!=adj[i][j])
+            dfs(adj[i][j],i);
+    }
+}*/
+unsigned long long int ex(unsigned long long int a,unsigned long long int n,unsigned long long int  m)
+{
+    //a=
+  if(n==0)
+  return 1;
+ if(n==1)
+  return a%m;
+  //n=n%(m-1);
+  unsigned long long int y=ex(a,n/2,m);
+  if(n%2==1)
+   return (a*((y*y)%m))%m;
+  else
+   return (y*y)%m;
+}
+int main()
+{
+  lli n,m;
+  cin>>n>>m;
+  lli mod1=ex(10,n,m*m);
+ // lli mod2=ex(10,n,m);
+  //cout<<mod1<<" "<<mod2<<endl;
+  cout<<mod1/m<<endl;
+ // rep(i,m){
+  //    if(i*m==(mod1-mod2+m*m)%(m*m)) {cout<<i<<endl;break;}
+ // }
+  return 0;
 }

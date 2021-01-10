@@ -1,10 +1,8 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
 #define llu unsigned long long int
-//#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
-#define sa(a,n) rep(ii,n) cin>>a[ii];
+#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
 #define rep(i,n) for(int i=0;i<n;i++) 
 #define reps(i,a,n) for(int i=a;i<n;i++) 
 #define rrep(i,n) for(int i=n-1;i>=0;i--)
@@ -37,7 +35,32 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
-int main() {
-    
-    return 0;
+/*v(int) adj[200001];
+void dfs(int i,int p){
+    rep(j,adj[i].size()){
+        if(p!=adj[i][j])
+            dfs(adj[i][j],i);
+    }
+}*/
+int main()
+{
+  int n,k;
+  cin>>n>>k;
+  int a[10];
+  sa(a,k,d);
+  while(1){
+
+      int v=n;
+      bool flag=true;
+      while(v){
+          int d=v%10;
+          v/=10;
+          rep(i,k) if(d==a[i]) flag=false;
+          if(!flag) break;
+      }
+      if(flag) {cout<<n<<endl;return 0;}
+      n++;
+  } 
+  
+  return 0;
 }

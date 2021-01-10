@@ -1,10 +1,8 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
 #define llu unsigned long long int
-//#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
-#define sa(a,n) rep(ii,n) cin>>a[ii];
+#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
 #define rep(i,n) for(int i=0;i<n;i++) 
 #define reps(i,a,n) for(int i=a;i<n;i++) 
 #define rrep(i,n) for(int i=n-1;i>=0;i--)
@@ -37,7 +35,36 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
-int main() {
-    
-    return 0;
+/*v(int) adj[200001];
+void dfs(int i,int p){
+    rep(j,adj[i].size()){
+        if(p!=adj[i][j])
+            dfs(adj[i][j],i);
+    }
+}*/
+int main()
+{
+  int t;
+  sd(t);
+  int a[200001]={0};
+  int b[100001]={0};
+  rep(tt,t){
+    //cout<<"Case #"<<tt+1<<": ";
+    int n,j;
+    sd(n);
+    //v(int) a(2*n+2);
+    sa(b,n,d);
+    rep(i,n) a[b[i]]++;
+    int c=0,p=2*n+2;
+    rrep(i,2*n+1){
+      if(a[i]>1) c+=min(2,p-i),p=i;
+      else if(a[i] && p>i+1) c++,p=i+1;
+      else if(a[i]) c++,p=i;
+      //cout<<c<<" ";
+    }
+    rep(i,n) a[b[i]]--;
+    cout<<c;
+    nline;
+  }
+  return 0;
 }

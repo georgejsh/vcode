@@ -1,10 +1,8 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
 #define llu unsigned long long int
-//#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
-#define sa(a,n) rep(ii,n) cin>>a[ii];
+#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
 #define rep(i,n) for(int i=0;i<n;i++) 
 #define reps(i,a,n) for(int i=a;i<n;i++) 
 #define rrep(i,n) for(int i=n-1;i>=0;i--)
@@ -37,7 +35,58 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
-int main() {
-    
-    return 0;
+/*v(int) adj[200001];
+void dfs(int i,int p){
+    rep(j,adj[i].size()){
+        if(p!=adj[i][j])
+            dfs(adj[i][j],i);
+    }
+}*/
+const int maxN=2e+5;
+int a[maxN],b[maxN],c[maxN],d[maxN];
+int main()
+{
+  
+  int n;
+  cin>>n;
+  sa(a,n,d);
+  sa(b,n,d);
+  rep(i,n){
+      int x;
+      cin>>x;
+      c[x-1]=i;
+      d[i]=x-1;
+  }
+  v(p2) ans;
+  bool ok=true;
+  for(int i=0;i<n;){
+      if(c[i]==i) {i++;continue;}
+      if(b[d[i]]>=a[i])  {ok=false;break;}
+      //cout<<i<<" "<<c[i]<<" "<<d[i]<<" "<<endl;
+      if(b[d[i]]>=a[c[i]]  && b[d[d[i]]]>=a[i]) {ok=false;break;}
+      if(b[d[i]]<a[c[i]]) {
+          int cc=c[i],dd=d[i];
+          c[dd]=cc;
+          d[cc]=dd;
+          ans.pb(mk(i,cc));
+          c[i]=d[i]=i;
+          i++;
+      }
+      else{
+          int cc=d[d[i]],dd=d[i];
+          c[dd]=d[dd]=dd;
+          c[cc]=i;
+          d[i]=cc;
+          ans.pb(mk(i,dd));
+      }
+  }
+  if(ok) {
+      cout<<ans.size()<<endl;
+      for(auto x:ans) cout<<x.fi+1<<" "<<x.se+1<<endl;
+  }else
+  {
+      cout<<-1<<endl;
+  }
+  
+  return 0;
 }

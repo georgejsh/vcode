@@ -1,10 +1,8 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
 #define llu unsigned long long int
-//#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
-#define sa(a,n) rep(ii,n) cin>>a[ii];
+#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
 #define rep(i,n) for(int i=0;i<n;i++) 
 #define reps(i,a,n) for(int i=a;i<n;i++) 
 #define rrep(i,n) for(int i=n-1;i>=0;i--)
@@ -18,7 +16,7 @@ using namespace std;
 #define mk make_pair
 #define pb push_back
 #define pa(a,n,t)  for(int i=0;i<n;i++) printf("%"#t"",a[i])
-#define p2 pair<int,int>
+#define p2 pair<lli,lli>
 #define p3 pair<p2,int>
 #define fi first
 #define se second
@@ -37,7 +35,41 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
-int main() {
-    
-    return 0;
+/*v(int) adj[200001];
+void dfs(int i,int p){
+    rep(j,adj[i].size()){
+        if(p!=adj[i][j])
+            dfs(adj[i][j],i);
+    }
+}*/
+int main()
+{
+  int t;
+  sd(t);
+  int a[100001];
+  queue<p2> q;
+  rep(tt,t){
+    int n,x;
+    cin>>n>>x;
+    sa(a,n,d);
+    rep(i,n) q.push(mk(a[i],1));
+    lli s=0;
+    while(!q.empty()){
+        auto p=q.front();
+        q.pop();
+        s+=p.se*1ll*p.fi;
+        if(p.fi%x!=0){
+            break; 
+        } 
+        if(p.fi/x!=0)
+        q.push(mk(p.fi/x,p.se*1ll*x));
+    }
+    while(!q.empty()) {
+        auto p=q.front();
+         q.pop();
+         s+=p.se*1ll*p.fi;
+    }
+    cout<<s<<endl;
+  }
+  return 0;
 }

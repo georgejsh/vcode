@@ -1,10 +1,8 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 #define lli long long int
 #define llu unsigned long long int
-//#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
-#define sa(a,n) rep(ii,n) cin>>a[ii];
+#define sa(a,n,t) for(int ii=0;ii<n;ii++) scanf("%"#t"",&(a)[ii])
 #define rep(i,n) for(int i=0;i<n;i++) 
 #define reps(i,a,n) for(int i=a;i<n;i++) 
 #define rrep(i,n) for(int i=n-1;i>=0;i--)
@@ -37,7 +35,43 @@ using namespace std;
 #define pp3(m) cout<<m.fi.fi<<" "<<m.fi.se<<" "<<m.se<<" "
 #define pp2(m) cout<<m.fi<<" "<<m.se<<" "
 #define debug 0
-int main() {
-    
-    return 0;
+/*v(int) adj[200001];
+void dfs(int i,int p){
+    rep(j,adj[i].size()){
+        if(p!=adj[i][j])
+            dfs(adj[i][j],i);
+    }
+}*/
+int main()
+{
+  int t;
+  sd(t);
+  rep(tt,t){
+    //cout<<"Case #"<<tt+1<<": ";
+    string s;
+    cin>>s;
+    int c=0;
+    for(int i=0;s[i]!='\0'&& s[i+1]!='\0'&& s[i+2]!='\0';i++){
+        if(s[i]==s[i+2] && i>0 && s[i-1]==s[i] && s[i]!='X'){
+            c++;
+            s[i]='X';
+           // i+=2;
+        }
+        else if(s[i]==s[i+2] && s[i]!='X'){
+            c++;
+            s[i+2]='X';
+          //  i+=2;
+        }
+    }
+    for(int i=0;s[i]!='\0'&& s[i+1]!='\0';i++){
+        if(s[i]==s[i+1] && s[i]!='X'){
+            c++;
+            s[i+1]='Y';
+            i++;
+        }
+    }
+    cout<<c;
+    nline;
+  }
+  return 0;
 }
